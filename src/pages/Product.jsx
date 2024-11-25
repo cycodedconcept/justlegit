@@ -47,10 +47,6 @@ const Product = () => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
-
-
-
-
   const dispatch = useDispatch();
   const { categories } = useSelector((state) => state.categories);
 
@@ -149,7 +145,8 @@ const Product = () => {
         button: "OK",
       })
       setPro(true);
-      setWal(false)
+      setWal(false);
+      dispatch(fetchDetails({ token, searchValue: myValue }));
     })
     .catch((error) => {
       console.error(error);
@@ -348,7 +345,7 @@ const Product = () => {
                       <td><button className='btn-status' onClick={(e) => {
                         e.stopPropagation();
                         switchStatus(search.id, token)
-                      }}>Change Status</button></td>
+                      }}>{search.status === 1 ? 'active' : 'inactive'}</button></td>
                       <td style={{ cursor: 'pointer' }} onClick={(e) => e.stopPropagation()}>
                         <FontAwesomeIcon 
                           icon={faEdit} 
@@ -381,7 +378,7 @@ const Product = () => {
                       <td><button className='btn-status' onClick={(e) => {
                         e.stopPropagation();
                         switchStatus(view.id, token)
-                      }}>Change Status</button></td>
+                      }}>{view.status === 1 ? 'active' : 'inactive'}</button></td>
                       <td style={{ cursor: 'pointer' }} onClick={(e) => e.stopPropagation()}>
                         <FontAwesomeIcon 
                           icon={faEdit} 
