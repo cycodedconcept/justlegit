@@ -72,7 +72,7 @@ const Products = () => {
         price: productDetails.main_price || '',
         discount: productDetails.main_price_discount || '',
         stock: productDetails.stock || '',
-        status: productDetails.status || '',
+        status: productDetails.status === 1 ? "1" : "0" || '',
         productDescription: productDetails.product_description || '',
         category: productDetails.category_id || '',
       });
@@ -110,6 +110,7 @@ const Products = () => {
         icon: "success",
         button: "OK",
       })
+      dispatch(fetchAllProducts({ page: currentPage, token }));
     })
     .catch((error) => {
       console.error(error);
@@ -218,7 +219,7 @@ const Products = () => {
                           e.stopPropagation();
                           switchStatus(product.id, token);
                         }}          
-                        >Change Status
+                        >{product.status === 1 ? 'active' : 'inactive'}
                       </button>
                     </td>
                     <td style={{ cursor: 'pointer' }} onClick={(e) => e.stopPropagation()}>
@@ -369,12 +370,16 @@ const Products = () => {
                   <div className="col-sm-12 col-md-12 col-lg-6 mt-4">
                     <div className="form-group">
                       <label>Status</label>
-                      <input 
+                      {/* <input 
                         type="text" 
                         placeholder='Status'
                         value={inputValues.status}
                         onChange={(e) => setInputValues({ ...inputValues, status: e.target.value })}
-                      />
+                      /> */}
+                      <select name="" id="" value={inputValues.status} onChange={(e) => setInputValues({...inputValues, status: e.target.value})}>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                      </select>
                     </div>
                   </div>
 

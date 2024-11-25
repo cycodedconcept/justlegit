@@ -528,12 +528,16 @@ const Product = () => {
                   <div className="col-sm-12 col-md-12 col-lg-6 mt-4">
                     <div className="form-group">
                       <label>Status</label>
-                      <input 
+                      {/* <input 
                         type="text" 
                         placeholder='Status'
                         value={inputValues.status}
                         onChange={(e) => setInputValues({ ...inputValues, status: e.target.value })}
-                      />
+                      /> */}
+                      <select name="" id="" value={inputValues.status} onChange={(e) => setInputValues({...inputValues, status: e.target.value})}>
+                        <option value="1">Active</option>
+                        <option value="0">Inactive</option>
+                      </select>
                     </div>
                   </div>
 

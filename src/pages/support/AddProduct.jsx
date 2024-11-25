@@ -15,7 +15,7 @@ const AddProduct = () => {
     const [categoryId, setCategoryId] = useState('');
     const [inches, setInches] = useState([{ inche: 0, price: 0, discount: 0 }]);
     const [images, setImages] = useState([]);
-    const [status, setStatus] = useState('1');
+    const [status, setStatus] = useState('');
 
     const dispatch = useDispatch();
     const { isLoading, error } = useSelector((state) => state.product);
@@ -78,19 +78,19 @@ const AddProduct = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
     
-        const matchingInch = inches.find(
-            (inch) => inch.price === parseInt(price) && inch.discount === parseInt(discount)
-        );
+        // const matchingInch = inches.find(
+        //     (inch) => inch.price === parseInt(price) && inch.discount === parseInt(discount)
+        // );
     
-        if (!matchingInch) {
-            Swal.fire({
-                title: "Error",
-                text: "The inches array must contain an item with a price and discount matching the main price and discount.",
-                icon: "error",
-                button: "OK",
-            });
-            return;
-        }
+        // if (!matchingInch) {
+        //     Swal.fire({
+        //         title: "Error",
+        //         text: "The inches array must contain an item with a price and discount matching the main price and discount.",
+        //         icon: "error",
+        //         button: "OK",
+        //     });
+        //     return;
+        // }
     
         // Proceed with submission if matching object is found
         const formData = new FormData();
@@ -120,7 +120,7 @@ const AddProduct = () => {
                     setCategoryId('');
                     setInches([{ inche: 0, price: 0, discount: 0 }]);
                     setImages([]);
-                    setStatus('1');
+                    setStatus('');
                 });
             })
             .catch((error) => {
@@ -168,7 +168,12 @@ const AddProduct = () => {
                <div className="col-sm-12 col-md-12 col-lg-6 mt-4">
                   <div className="form-group">
                      <label htmlFor="exampleInputPassword1">Status</label>
-                     <input type="text" placeholder='pending' value={status} onChange={(e) => setStatus(e.target.value)}/>
+                     {/* <input type="text" placeholder='pending' value={status} onChange={(e) => setStatus(e.target.value)}/> */}
+                     <select name="" id="" value={status} onChange={(e) => setStatus(e.target.value)}>
+                         <option>--choose status--</option>
+                         <option value="1">Active</option>
+                         <option value="0">Inactive</option>
+                     </select>
                  </div>
                </div>
                <div className="col-sm-12 col-md-12 col-lg-6 mt-4">
