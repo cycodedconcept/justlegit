@@ -34,3 +34,4 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         local-dir: dist/
         server-dir: /
+        active: false
