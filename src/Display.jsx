@@ -44,10 +44,11 @@ const Display = () => {
             </PrivateRoute>
           }
         />
-        <Route 
+        {/* <Route 
           path="*" 
           element={<Navigate to="/" replace />} 
-        />
+        /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

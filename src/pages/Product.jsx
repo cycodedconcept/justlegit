@@ -323,6 +323,7 @@ const Product = () => {
                   <th>Product Price</th>
                   <th>Discounts</th>
                   <th>Product Number</th>
+                  <th>Stock</th>
                   <th>Status Setting</th>
                   <th>Product Settings</th>
                 </tr>
@@ -342,6 +343,7 @@ const Product = () => {
                       <td>{search.price}</td>
                       <td>{search.discount}</td>
                       <td>{search.product_number}</td>
+                      <td>{search.stock}</td>
                       <td><button className='btn-status' onClick={(e) => {
                         e.stopPropagation();
                         switchStatus(search.id, token)
@@ -375,6 +377,7 @@ const Product = () => {
                       <td>₦{Number(view.price).toLocaleString()}</td>
                       <td>₦{Number(view.discount).toLocaleString()}</td>
                       <td>{view.product_number}</td>
+                      <td>{view.stock}</td>
                       <td><button className='btn-status' onClick={(e) => {
                         e.stopPropagation();
                         switchStatus(view.id, token)

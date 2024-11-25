@@ -194,6 +194,7 @@ const Products = () => {
                 <th>Product Price</th>
                 <th>Discounts</th>
                 <th>Product Number</th>
+                <th>Stock</th>
                 <th>Status Setting</th>
                 <th>Product Settings</th>
               </tr>
@@ -213,6 +214,7 @@ const Products = () => {
                     <td>₦{Number(product.price).toLocaleString()}</td>
                     <td>₦{Number(product.discount).toLocaleString()}</td>
                     <td>{product.product_number}</td>
+                    <td>{product.stock}</td>
                     <td>
                       <button className='btn-status' 
                         onClick={(e) => {
