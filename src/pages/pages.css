@@ -1055,6 +1055,10 @@ input, textarea, select {
       font-size: 22px;
   }
 
+  .ebe {
+    width: 50%;
+  }
+
 @media screen and (max-width: 992px) {
     .dash-cards {
         grid-template-columns: repeat(1, 1fr);
@@ -1127,6 +1131,10 @@ input, textarea, select {
 
     .un img {
         width: 100%;
+    }
+
+    .ebe {
+        width: 30%;
     }
 }
 
@@ -1238,7 +1246,7 @@ input, textarea, select {
 
   .invoice-container {
     padding: 2rem;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
   }
   
@@ -1282,6 +1290,20 @@ input, textarea, select {
     text-decoration: none;
     display: inline-block;
   }
+
+  @media print {
+    .invoice-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .invoice-container {
+      max-width: 800px; /* Disable responsiveness */
+    }
+  }
   /*  */
 
 .lint {
@@ -1290,6 +1312,7 @@ input, textarea, select {
     accent-color: #af4c4e;
     cursor: pointer;
 }
+
 
 .form-check-label {
     font-size: 15px;

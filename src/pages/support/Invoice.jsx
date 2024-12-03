@@ -7,6 +7,26 @@ import 'jspdf-autotable';
 import DynamicInvoiceTable from './DynamicInvoiceTable';
 
 const Invoice = () => {
+  useEffect(() => {
+    // Find the existing meta viewport tag
+    const metaViewport = document.querySelector('meta[name="viewport"]');
+
+    // Backup the original content
+    const originalContent = metaViewport?.getAttribute('content');
+
+    // Update the content to disable responsiveness
+    if (metaViewport) {
+      metaViewport.setAttribute('content', 'width=1000');
+    }
+
+    return () => {
+      // Restore the original content when the component unmounts
+      if (metaViewport) {
+        metaViewport.setAttribute('content', originalContent || 'width=device-width, initial-scale=1.0');
+      }
+    };
+  }, []);
+
   const { invoiceData } = useSelector((state) => state.commerce);
   const token = localStorage.getItem("key");
   const numberIn = localStorage.getItem("inum");
@@ -167,9 +187,9 @@ const tableHeaders = ['Product Name', 'Inches', 'Quantity', 'Price', 'Discounted
 
   return (
     <div className='p-5' ref={invoiceRef}>
-      <div className="d-flex justify-content-between py-5 px-3">
+      <div className="d-flex justify-content-between">
           <div>
-             <img src={logoUrl} alt="Company Logo" className="w-50" />
+             <img src={logoUrl} alt="Company Logo" className='ebe' />
           </div>
           <div>
             <p>Invoice ID: <strong>{numberIn}</strong></p>
