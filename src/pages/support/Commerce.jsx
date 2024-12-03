@@ -437,8 +437,7 @@ const addToCart = (productToAdd) => {
                         <div>Loading...</div>
                     ) : (
                         productDetails.images && productDetails.images.length > 0 ? (
-                            // <ImageCarousel images={productDetails.images} />
-                            "hello"
+                            <ImageCarousel images={productDetails.images} />
                         ) : (
                             <p>No images found</p>
                         )
