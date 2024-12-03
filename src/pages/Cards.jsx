@@ -9,7 +9,7 @@ import Wig from './Wig';
 const Cards = () => {
   let token = localStorage.getItem("key");
 
-  const { board } = useSelector((state) => state.dashboard);
+  const { board, isLoading } = useSelector((state) => state.dashboard);
   const dispatch = useDispatch();
 
 
@@ -100,6 +100,7 @@ const Cards = () => {
 
   return (
     <>
+    
       <div className="dash-cards">
         { cardDisplay }
       </div>

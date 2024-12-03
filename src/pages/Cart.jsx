@@ -4,6 +4,7 @@ import { createInvoice, getInvoiceData, getLandMark, getCountries } from '../fea
 import Invoice from './support/Invoice';
 import Swal from 'sweetalert2';
 import { useCart } from './CartContext'
+import { Ec } from '../assets/images'
 
 
 const Cart = () => {
@@ -270,7 +271,10 @@ const handleSubmit = async (e) => {
     {view ? (
     <>
       {cartItems.length === 0 ? (
-        <p>Your cart is empty</p>
+        // <p>Your cart is empty</p>
+        <div className='text-center un'>
+          <img src={ Ec } alt='image'/>
+        </div>
       ) : (
         <>
             {cartItems.map((item) => (
@@ -305,170 +309,171 @@ const handleSubmit = async (e) => {
       
 
       {modal ? (
-          <>
-           <div className="modal-overlay">
-                <div className="modal-content2">
-                    <div className="head-mode">
-                            <h3>Provide Information</h3>
-                            <button className="modal-close" onClick={hideModal}>
-                                &times;
-                            </button>
-                    </div>
-                    <div className="modal-body">
-                        <form className='w-100' onSubmit={handleSubmit}>
-                            <p className='mb-3' style={{color: '#FF962E'}}>Customer Bio</p>
-                            <div className="row">
-                                <div className="col-sm-12 col-md-12 col-lg-6">
-                                    <div className="form-group">
-                                        <label htmlFor="customer">Name</label>
-                                        <input type="text" name="name" placeholder='cyril' className='w-100' value={name} onChange={handleChange}/>
-                                    </div>
-                                </div>
-                                <div className="col-sm-12 col-md-12 col-lg-6">
-                                    <div className="form-group">
-                                        <label htmlFor="customer">Email</label>
-                                        <input type="email" name="email" placeholder='cyril@gmail.com' className='w-100' value={email} onChange={handleChange}/>
-                                    </div>
-                                </div>
-                                <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
-                                    <div className="form-group">
-                                        <label htmlFor="customer">Phone Number</label>
-                                        <input type="text" name="phone" placeholder='091234567' className='w-100' value={phone} onChange={handleChange}/>
-                                    </div>
-                                </div>
-                                <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
-                                    <div className="form-group">
-                                        <label htmlFor="customer">Amount</label>
-                                        <input type="text" name=""  className='w-100' value={Math.round(total)} disabled/>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                              <p className='my-5' style={{color: '#FF962E'}}>Delivery Details</p>
-                            
-                            </div>
-                            
+        <>
+          <div className="modal-overlay">
+            <div className="modal-content2">
+              <div className="head-mode">
+                <h3>Provide Information</h3>
+                <button className="modal-close" onClick={hideModal}>
+                  &times;
+                </button>
+              </div>
+              <div className="modal-body">
+                <form className='w-100' onSubmit={handleSubmit}>
+                  <p className='mb-3' style={{color: '#FF962E'}}>Customer Bio</p>
+                  <div className="row">
+                      <div className="col-sm-12 col-md-12 col-lg-6">
+                          <div className="form-group">
+                              <label htmlFor="customer">Name</label>
+                              <input type="text" name="name" placeholder='cyril' className='w-100' value={name} onChange={handleChange}/>
+                          </div>
+                      </div>
+                      <div className="col-sm-12 col-md-12 col-lg-6">
+                          <div className="form-group">
+                              <label htmlFor="customer">Email</label>
+                              <input type="email" name="email" placeholder='cyril@gmail.com' className='w-100' value={email} onChange={handleChange}/>
+                          </div>
+                      </div>
+                      <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
+                          <div className="form-group">
+                              <label htmlFor="customer">Phone Number</label>
+                              <input type="text" name="phone" placeholder='091234567' className='w-100' value={phone} onChange={handleChange}/>
+                          </div>
+                      </div>
+                      <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
+                          <div className="form-group">
+                              <label htmlFor="customer">Amount</label>
+                              <input type="text" name=""  className='w-100' value={Math.round(total)} disabled/>
+                          </div>
+                      </div>
+                  </div>
+                  <div>
+                    <p className='my-5' style={{color: '#FF962E'}}>Delivery Details</p>
+                  </div>
+                  
+                  <div className="d-flex justify-content-between">
+                  <div className="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    name="deliveryOption"
+                    value="pickup"
+                    checked={deliveryOption === 'pickup'}
+                    onChange={handleOptionChange}
+                    className="lint"
+                  />
 
-                            <div className="form-check form-check-inline">
-                            <input
-                              type="radio"
-                              name="deliveryOption"
-                              value="pickup"
-                              checked={deliveryOption === 'pickup'}
-                              onChange={handleOptionChange}
-                              className="lint"
-                            />
+                    <label className="form-check-label" for="inlineRadio1">pick up</label>
+                  </div>
+                  <div className="form-check form-check-inline">
+                  <input
+                    type="radio"
+                    name="deliveryOption"
+                    value="delivery"
+                    checked={deliveryOption === 'delivery'}
+                    onChange={handleOptionChange}
+                    className="lint"
+                  />
 
-                              <label className="form-check-label" for="inlineRadio1">pick up</label>
-                            </div>
-                            <div className="form-check form-check-inline">
-                            <input
-                              type="radio"
-                              name="deliveryOption"
-                              value="delivery"
-                              checked={deliveryOption === 'delivery'}
-                              onChange={handleOptionChange}
-                              className="lint"
-                            />
+                    <label className="form-check-label" for="inlineRadio2">Delivery</label>
+                  </div>
+                  </div>
+                  
 
-                              <label className="form-check-label" for="inlineRadio2">Delivery</label>
-                            </div>
-
-                            {sd ? (
-                              <>
-                                <div className="row">
-                                  <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
-                                      <div className="form-group">
-                                          <label htmlFor="customer">Country</label>
-                                          {/* <input type="text" name="country" placeholder='Nigeria' className='w-100' value={country} onChange={handleChange}/> */}
-                                          <select name="country" id="" value={country} onChange={handleChange}>
-                                            <option>--choose country--</option>
-                                            {countryData.data.map((country, index) => 
-                                              <option key={index} value={country.name}>{country.name}</option>
-                                            )}
-                                          </select>
-                                      </div>
-                                  </div>
-                                  <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
-                                    <div className="form-group">
-                                      <label htmlFor="customer">State</label>
-                                      <select name="state" id="" value={state} onChange={handleChange}>
-                                        <option>--choose state--</option>
-                                        {st.map((item, index) => {
-                                          // Remove "State" and make the first character lowercase
-                                          const formattedName = item.name.replace(/state/i, '').trim();
-                                          const displayName = formattedName.charAt(0).toLowerCase() + formattedName.slice(1);
-                                          
-                                          return (
-                                            <option key={index} value={displayName}>{displayName}</option>
-                                          );
-                                        })}
-                                      </select>
-                                    </div>
-                                  </div>
-
-                                  <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
-                                      <div className="form-group">
-                                          <label htmlFor="customer">Address</label>
-                                          <input type="text" name="address" className='w-100' value={address} onChange={handleChange}/>
-                                      </div>
-                                  </div>
-                                  <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
-                                      <div className="form-group">
-                                          <label htmlFor="customer">Nearest Landmark</label>
-                                          {/* <input type="text" name="landmark" className='w-100' value={landmark} onChange={handleChange}/> */}
-                                          <select name="landmark" id="" value={landmark} onChange={handleChange}>
-                                          <option>--choose landmark--</option>
-                                          {land.map((ln, index) => 
-                                            <option 
-                                              key={index} 
-                                              value={`${ln.landmark_name}-${ln.landmark_price}`}
-                                            >
-                                              {`${ln.landmark_name} - ${ln.landmark_price}`}
-                                            </option>
-                                          )}
-                                        </select>
-                                      </div>
-                                  </div>
+                    {sd ? (
+                      <>
+                        <div className="row">
+                          <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
+                              <div className="form-group">
+                                  <label htmlFor="customer">Country</label>
+                                  {/* <input type="text" name="country" placeholder='Nigeria' className='w-100' value={country} onChange={handleChange}/> */}
+                                  <select name="country" id="" value={country} onChange={handleChange}>
+                                    <option>--choose country--</option>
+                                    {countryData.data.map((country, index) => 
+                                      <option key={index} value={country.name}>{country.name}</option>
+                                    )}
+                                  </select>
                               </div>
-                              </>
-                            ) : ('')}
-                            
-                            <p className='my-3' style={{color: '#FF962E'}}>Others</p>
-                            <div className="row">
-                                    <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
-                                        <div className="form-group">
-                                            <label htmlFor="customer">Payment Method</label>
-                                            <input type="text" name="payment" className='w-100' value={payment} onChange={handleChange}/>
-                                        </div>
-                                    </div>
-                                    <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
-                                        <div className="form-group">
-                                            <label htmlFor="customer">Additional Information</label>
-                                            <input type="text" name="additional" className='w-100' value={additional} onChange={handleChange}/>
-                                        </div>
-                                    </div>
+                          </div>
+                          <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
+                            <div className="form-group">
+                              <label htmlFor="customer">State</label>
+                              <select name="state" id="" value={state} onChange={handleChange}>
+                                <option>--choose state--</option>
+                                {st.map((item, index) => {
+                                  // Remove "State" and make the first character lowercase
+                                  const formattedName = item.name.replace(/state/i, '').trim();
+                                  const displayName = formattedName.charAt(0).toLowerCase() + formattedName.slice(1);
+                                  
+                                  return (
+                                    <option key={index} value={displayName}>{displayName}</option>
+                                  );
+                                })}
+                              </select>
                             </div>
-                            <button className='log-btn mt-3'>
-                                {
-                                    spinItem ?(
-                                        <>
-                                        <div className="spinner-border spinner-border-sm text-light" role="status">
-                                            <span className="sr-only"></span>
-                                        </div>
-                                        <span>Sending... </span>
-                                        </>
-                                        
-                                    ): (
-                                        'Send Details'
-                                    )
-                                }
-                            </button>
-                        </form>
+                          </div>
+
+                          <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
+                              <div className="form-group">
+                                  <label htmlFor="customer">Address</label>
+                                  <input type="text" name="address" className='w-100' value={address} onChange={handleChange}/>
+                              </div>
+                          </div>
+                          <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
+                              <div className="form-group">
+                                  <label htmlFor="customer">Nearest Landmark</label>
+                                  {/* <input type="text" name="landmark" className='w-100' value={landmark} onChange={handleChange}/> */}
+                                  <select name="landmark" id="" value={landmark} onChange={handleChange}>
+                                  <option>--choose landmark--</option>
+                                  {land.map((ln, index) => 
+                                    <option 
+                                      key={index} 
+                                      value={`${ln.landmark_name}-${ln.landmark_price}`}
+                                    >
+                                      {`${ln.landmark_name} - ${ln.landmark_price}`}
+                                    </option>
+                                  )}
+                                </select>
+                              </div>
+                          </div>
+                      </div>
+                      </>
+                    ) : ('')}
+                    
+                    <p className='my-3' style={{color: '#FF962E'}}>Others</p>
+                    <div className="row">
+                            <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
+                                <div className="form-group">
+                                    <label htmlFor="customer">Payment Method</label>
+                                    <input type="text" name="payment" className='w-100' value={payment} onChange={handleChange}/>
+                                </div>
+                            </div>
+                            <div className="col-sm-12 col-md-12 col-lg-6 mt-3">
+                                <div className="form-group">
+                                    <label htmlFor="customer">Additional Information</label>
+                                    <input type="text" name="additional" className='w-100' value={additional} onChange={handleChange}/>
+                                </div>
+                            </div>
                     </div>
-                </div>
-           </div>
-          </>
+                    <button className='log-btn mt-3'>
+                        {
+                            spinItem ?(
+                                <>
+                                <div className="spinner-border spinner-border-sm text-light" role="status">
+                                    <span className="sr-only"></span>
+                                </div>
+                                <span>Sending... </span>
+                                </>
+                                
+                            ): (
+                                'Send Details'
+                            )
+                        }
+                    </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </>
       ) : ''}
       
     </>

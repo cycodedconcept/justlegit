@@ -30,11 +30,13 @@ const Commerce = () => {
   const [selectedInch, setSelectedInch] = useState("");
   const [quantity, setQuantity] = useState(1);
   const [displayPrice, setDisplayPrice] = useState(productDetails.main_price);
+
   const [strikethroughPrice, setStrikethroughPrice] = useState(null);
   const [filterText, setFilterText] = useState('');
   const [mod, setMod] = useState(false);
   const [cat, setCat] = useState(true);
   const [back, setBack] = useState(false);
+  const [dis, setDis] = useState(true);
 
   //   new state
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -88,14 +90,20 @@ const Commerce = () => {
 
   const changeProduct = () => {
     setDetails(true);
+    setDis(true);
   }
+
 
   const handleInchChange = (e) => {
     setSelectedInch(e.target.value);
-    const selectedInchObject = productDetails.inches.find((inch) => String(inch.inche) === String(e.target.value));
-
+    setDis(false)
+    const selectedInchObject = productDetails.inches.find(
+      (inch) => String(inch.inche) === String(e.target.value)
+    );
+  
     if (selectedInchObject) {
       if (selectedInchObject.discount) {
+        console.log("Selected Discount Price:", selectedInchObject.discount); // Log the discount price
         setDisplayPrice(selectedInchObject.discount);
         setStrikethroughPrice(selectedInchObject.price);
       } else {
@@ -103,10 +111,15 @@ const Commerce = () => {
         setStrikethroughPrice(null);
       }
     } else {
-      setDisplayPrice(productDetails.main_price_discount || productDetails.main_price);
-      setStrikethroughPrice(productDetails.main_price_discount ? productDetails.main_price : null);
+      const fallbackPrice = productDetails.main_price_discount || productDetails.main_price;
+      console.log("Fallback Price:", fallbackPrice); // Log fallback price if no inch is selected
+      setDisplayPrice(fallbackPrice);
+      setStrikethroughPrice(
+        productDetails.main_price_discount ? productDetails.main_price : null
+      );
     }
   };
+  
 
 
   const handleQuantityChange = (type) => {
@@ -201,64 +214,6 @@ const Commerce = () => {
     }
   };
 
-//   const addToCart = (productToAdd) => {
-//     // Ensure an inch is selected if required
-//     if (!selectedInch && productToAdd.inches && productToAdd.inches.length > 0) {
-//         Swal.fire({
-//             title: 'Select an Inch',
-//             text: 'Please select an inch before adding to the cart.',
-//             icon: 'warning',
-//             timer: 3000,
-//             showConfirmButton: false,
-//         });
-//         return;
-//     }
-
-//     const isProductInCart = cart.some(item => Number(item.id) === Number(productToAdd.id));
-    
-//     if (!isProductInCart) {
-//         // Find the selected inch object, if any
-//         const selectedInchObject = productToAdd.inches?.find((inche) => String(inche.inche) === String(selectedInch));
-
-//         // Determine product amount based on conditions
-//         const productAmount = selectedInchObject
-//             ? selectedInchObject.discount || selectedInchObject.price
-//             : productToAdd.main_price_discount || productToAdd.main_price;
-
-//         const newCartItem = {
-//             product_id: productToAdd.product_id,
-//             product_name: productToAdd.product_name,
-//             product_amount: productAmount,
-//             images: productToAdd.images,
-//             inches: selectedInch,
-//             category_id: productToAdd.category_id,
-//             order_quantity: quantity,
-//             initial_amount: selectedInchObject ? selectedInchObject.price : 0,
-//             discounted: selectedInchObject ? selectedInchObject.discount : 0,
-//         };
-
-//         const updatedCart = [...cart, newCartItem];
-//         setCart(updatedCart);
-//         localStorage.setItem('cart', JSON.stringify(updatedCart));
-
-//         Swal.fire({
-//             title: 'Added to Cart!',
-//             text: `${productToAdd.product_name} has been added to your cart.`,
-//             icon: 'success',
-//             timer: 3000,
-//             showConfirmButton: false
-//         });
-//     } else {
-//         Swal.fire({
-//             title: 'Already in Cart',
-//             text: `${productToAdd.product_name} is already in your cart.`,
-//             icon: 'info',
-//             timer: 3000,
-//             showConfirmButton: false
-//         });
-//     }
-//   };
-
 
 
 const addToCart = (productToAdd) => {
@@ -313,7 +268,7 @@ const addToCart = (productToAdd) => {
         showConfirmButton: false
       });
     }
-  };
+};
 
 
   const filteredProducts = product.filter((item) => {
@@ -333,6 +288,7 @@ const addToCart = (productToAdd) => {
   const showAllProduct = () => {
     setCat(true);
     setBack(false);
+    setDis(true);
   }
   
   return (
@@ -392,8 +348,8 @@ const addToCart = (productToAdd) => {
                     <div>Loading...</div>
                 ) : error ? (
                     <div>Error: {error?.message || 'Something went wrong'}</div>
-                ) : viewDetails?.data.length > 0 ? (
-                    viewDetails?.data.map((item) => 
+                ) : viewDetails?.data?.length > 0 ? (
+                    viewDetails?.data?.map((item) => 
                         <div className="col-sm-12 col-md-12 col-lg-3 mb-5" key={item.id}>
                             <div className="card-item" style={{boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px', borderRadius: '20px'}}>
                                 <div className="card-img">
@@ -491,18 +447,33 @@ const addToCart = (productToAdd) => {
                     <p>{productDetails.product_name}</p>
                     <p style={{ color: '#f3a557' }}>
                         <b>
-                            {productDetails.main_price_discount ? (
+                           {dis ? (
                             <>
-                                <span className="mx-2">
-                                ₦{productDetails.main_price_discount ? productDetails.main_price_discount.toLocaleString() : '0'}
-                                </span>
-                                <span style={{ textDecoration: 'line-through', color: '#000', fontSize: '13px' }}>
-                                ₦{productDetails.main_price ? productDetails.main_price.toLocaleString() : '0'}
-                                </span>
+                              {productDetails.main_price_discount ? (
+                                <>
+                                    <span className="mx-2">
+                                    ₦{productDetails.main_price_discount ? productDetails.main_price_discount.toLocaleString() : '0'}
+                                    </span>
+                                    <span style={{ textDecoration: 'line-through', color: '#000', fontSize: '13px' }}>
+                                    ₦{productDetails.main_price ? productDetails.main_price.toLocaleString() : '0'}
+                                    </span>
+                                </>
+                                ) : (
+                                <>₦{productDetails.main_price ? productDetails.main_price.toLocaleString() : '0'}</>
+                              )}
                             </>
-                            ) : (
-                            <>₦{productDetails.main_price ? productDetails.main_price.toLocaleString() : '0'}</>
+                          ) : (
+                          <>
+                            <span className="mx-2">
+                              ₦{displayPrice.toLocaleString()}
+                            </span>
+                            {strikethroughPrice && (
+                              <span style={{ textDecoration: 'line-through', color: '#000', fontSize: '13px' }}>
+                                ₦{strikethroughPrice.toLocaleString()}
+                              </span>
                             )}
+                          </>
+                        )} 
                         </b>
                         </p>
 
@@ -549,6 +520,7 @@ const addToCart = (productToAdd) => {
                         className="log-btn mt-5 w-100"
                     />
                 </div>
+
             </div>
             <div className="below-section mt-5">
                 <h5 style={{color: '#f3a557'}}>Product Description</h5>

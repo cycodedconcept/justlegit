@@ -540,20 +540,45 @@ const Products = () => {
                   </div>
                   <hr style={{border: '1px solid #FF962E'}}/>
 
-                  <div className="row">
-                    {productDetails.images.map((image) =>
-                      <div className="col-sm-4 col-md-12 col-lg-4 d-flex justify-content-center">
-                        <div style={{
-                            backgroundImage: `url(${image.filename})`,
-                            backgroundRepeat: 'no-repeat',
-                            backgroundSize: 'contain',
-                            width: '100%',
-                            height: '150px',
-                            borderRadius: '20px',
-                          }}>
+                  <div id="imageCarousel" className="carousel slide" data-bs-ride="carousel">
+                    <div className="carousel-inner">
+                      {productDetails.images.map((image, index) => (
+                        <div
+                          key={index}
+                          className={`carousel-item ${index === 0 ? "active" : ""}`}
+                        >
+                          <div
+                            style={{
+                              backgroundImage: `url(${image.filename})`,
+                              backgroundRepeat: "no-repeat",
+                              backgroundSize: "contain",
+                              backgroundPosition: "center",
+                              width: "100%",
+                              height: "300px",
+                              borderRadius: "20px",
+                            }}
+                          ></div>
                         </div>
-                      </div> 
-                    )}
+                      ))}
+                    </div>
+                    <button
+                      className="carousel-control-prev custom-control"
+                      type="button"
+                      data-bs-target="#imageCarousel"
+                      data-bs-slide="prev"
+                    >
+                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span className="visually-hidden">Previous</span>
+                    </button>
+                    <button
+                      className="carousel-control-next custom-control"
+                      type="button"
+                      data-bs-target="#imageCarousel"
+                      data-bs-slide="next"
+                    >
+                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span className="visually-hidden">Next</span>
+                    </button>
                   </div>
                   <hr style={{border: '1px solid #FF962E'}}/>
                   <div className="table-container">

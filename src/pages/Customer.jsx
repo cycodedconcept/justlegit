@@ -288,17 +288,15 @@ const Customer = () => {
                       <th>Delivery Status</th>
                       <th>Order Number</th>
                       <th>Date Delivered</th>
-                      <th>Additional Info</th>
                       <th>Delivery Country</th>
                       <th>Delivery State</th>
                       <th>Delivery Address</th>
-                      <th>Products</th>
                     </tr>
                   </thead>
                   <tbody>
                     {userOrders.map((user) => (
                       <React.Fragment key={user.id}>
-                        <tr onClick={() => callDetails(user.id)}>
+                        <tr onClick={() => callDetails(user.id)} style={{cursor: 'pointer'}}>
                           <td>{user.date}</td>
                           <td>{user.payment_status}</td>
                           <td>{user.payment_method}</td>
@@ -309,38 +307,9 @@ const Customer = () => {
                           </td>
                           <td>{user.order_id}</td>
                           <td>{user.date_delivered}</td>
-                          <td>{user.additional_information}</td>
                           <td>{user.delivery_country}</td>
                           <td>{user.delivery_state}</td>
                           <td>{user.delivery_address}</td>
-                          <td>
-                            {user.product && JSON.parse(user.product).length > 0 ? (
-                              <table className="product-table">
-                                <thead>
-                                  <tr>
-                                    <th>Product Amount</th>
-                                    <th>Initial Amount</th>
-                                    <th>Discounted</th>
-                                    <th>Inches</th>
-                                    <th>Order Quantity</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {JSON.parse(user.product).map((prod, index) => (
-                                    <tr key={index}>
-                                      <td>₦{Number(prod.product_amount).toLocaleString()}</td>
-                                      <td>₦{Number(prod.initial_amount).toLocaleString()}</td>
-                                      <td>{prod.discounted ? 'Yes' : 'No'}</td>
-                                      <td>{prod.inches}</td>
-                                      <td>{prod.order_quantity}</td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            ) : (
-                              <p>No product record found</p>
-                            )}
-                          </td>
                         </tr>
                         {/* <tr>
                           <td colSpan="12" className="view-details-cell">
@@ -393,7 +362,7 @@ const Customer = () => {
                     </div>
                     <h4 className='text-center mb-4'>User Information</h4>
                     <div className="row">
-                      <div className="col-sm-12 col-md-12 col-lg-5 p-3" style={{borderRight: '2px solid #FF962E', borderRadius: '20px'}}>
+                      <div className="col-sm-12 col-md-12 col-lg-5 p-3" style={{borderRight: '2px solid #FF962E'}}>
                         <div className='d-flex justify-content-between'>
                           <FontAwesomeIcon icon={faUserAlt} style={{color: '#FF962E'}}/>
                           <p>{orderDetails.ordered_by.name}</p>
@@ -463,20 +432,46 @@ const Customer = () => {
                           </tbody>
                       </table>
                     </div>
-                    
-                    {orderDetails.product.map((prod, index) => (
-                    <div key={index}>
-                      <div className="images mt-5">
-                        <div className="row">
-                          {prod.images.map((img, imgIndex) => (
-                            <div className="col-sm-12 col-md-12 col-lg-4">
-                              <img key={imgIndex} src={img.filename} alt={`Product image ${imgIndex + 1}`} className="w-100"/>
+
+                    <div id="orderDetailsCarousel" className="carousel slide mt-5" data-bs-ride="carousel">
+                      <div className="carousel-inner">
+                        {orderDetails?.product?.map((product, index) => (
+                          <div
+                            key={index}
+                            className={`carousel-item ${index === 0 ? "active" : ""}`}
+                          >
+                            <div className="d-flex justify-content-center">
+                              {product.images?.map((img, imgIndex) => (
+                                <img
+                                  key={imgIndex}
+                                  src={img.filename}
+                                  alt={`Thumbnail ${imgIndex + 1}`}
+                                  className="img-thumbnail w-25 p-2"
+                                />
+                              ))}
                             </div>
-                          ))}
-                        </div>
+                          </div>
+                        ))}
                       </div>
+                      <button
+                        className="carousel-control-prev custom-control"
+                        type="button"
+                        data-bs-target="#orderDetailsCarousel"
+                        data-bs-slide="prev"
+                      >
+                        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Previous</span>
+                      </button>
+                      <button
+                        className="carousel-control-next custom-control"
+                        type="button"
+                        data-bs-target="#orderDetailsCarousel"
+                        data-bs-slide="next"
+                      >
+                        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span className="visually-hidden">Next</span>
+                      </button>
                     </div>
-                    ))}
                     <h5 className='text-center mt-5'>Delivery Information</h5>
                     <div className='d-flex justify-content-between mb-3'>
                       <p>Delivery Country:</p>

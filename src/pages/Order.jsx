@@ -181,7 +181,7 @@ const Order = () => {
     {productView ? (
       <>
       {showButton ? (
-        <div className="my-2 mt-lg-3">
+        <div className="my-5 mt-lg-3">
           <input type="text" placeholder="Search Order..." className="search-input" value={filterText} onChange={(e) => setFilterText(e.target.value)}/>
           <button className={`or-btn my-3 mx-lg-1 ${activeButton === 'viewOrders' ? 'active-btn' : ''}`} onClick={ivoice}>View Orders</button>
           <button className={`or-btn my-3 mx-lg-1 ${activeButton === 'viewInvoices' ? 'active-btn' : ''}`} onClick={evoice}>View All Invoice</button>
@@ -208,6 +208,7 @@ const Order = () => {
                   <th>Payment Method</th>
                   <th>Date</th>
                   <th>Date Delivered</th>
+                  <th>Payment Status</th>
                   <th>Delivery Status</th>
                   <th>Details</th>
                 </tr>
@@ -224,6 +225,11 @@ const Order = () => {
                       <td>
                         <button className={item.payment_status}>
                           {item.payment_status}
+                        </button>
+                      </td>
+                      <td>
+                        <button className={item.delivery_status}>
+                          {item.delivery_status}
                         </button>
                       </td>
                       <td onClick={(e) => e.stopPropagation()}><FontAwesomeIcon icon={faEdit} onClick={() => displayModal(item.id)}/></td>
@@ -335,7 +341,7 @@ const Order = () => {
             </div>
 
             <div className="row mb-4">
-              <div className="col-sm-12 col-md-12 col-lg-6" style={{borderRight: '1px solid #FF962E', borderRadius: '20px'}}>
+              <div className="col-sm-12 col-md-12 col-lg-6" style={{borderRight: '1px solid #FF962E'}}>
                 <div>
                   <div className='d-flex justify-content-between'>
                       <p>Delivery Date:</p>
@@ -390,13 +396,46 @@ const Order = () => {
               </div>
             </div>
 
-              {orderDetails?.product?.map((image, index) => 
-                <div key={index} className="d-flex justify-content-between">
-                  {image.images?.map((img) =>
-                    <img src={img.filename} alt="Thumbnail" className="img-thumbnail w-25 p-3"/> 
-                  )}
-                </div>
-              )}
+            <div id="orderDetailsCarousel" className="carousel slide" data-bs-ride="carousel">
+              <div className="carousel-inner">
+                {orderDetails?.product?.map((product, index) => (
+                  <div
+                    key={index}
+                    className={`carousel-item ${index === 0 ? "active" : ""}`}
+                  >
+                    <div className="d-flex justify-content-center">
+                      {product.images?.map((img, imgIndex) => (
+                        <img
+                          key={imgIndex}
+                          src={img.filename}
+                          alt={`Thumbnail ${imgIndex + 1}`}
+                          className="img-thumbnail w-25 p-2"
+                        />
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button
+                className="carousel-control-prev custom-control"
+                type="button"
+                data-bs-target="#orderDetailsCarousel"
+                data-bs-slide="prev"
+              >
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button
+                className="carousel-control-next custom-control"
+                type="button"
+                data-bs-target="#orderDetailsCarousel"
+                data-bs-slide="next"
+              >
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+              </button>
+            </div>
+
 
               <div className="table-container">
               <table className="my-table my-5">

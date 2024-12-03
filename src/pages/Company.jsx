@@ -721,7 +721,7 @@ const disableAll = async (e) => {
                     </thead>
                     <tbody>
                       {filteredCategories?.map((category) => (
-                        <tr key={category.categories.id} onClick={() => myDetails(category.categories.id)}>
+                        <tr key={category.categories.id} onClick={() => myDetails(category.categories.id)} style={{cursor: 'pointer'}}>
                           <td onClick={(e) => e.stopPropagation()}>
                             <label className="custom-checkbox">
                               <input type="checkbox" name="options" checked={selectedCategoryIds.includes(category.categories.id)} 
@@ -768,81 +768,6 @@ const disableAll = async (e) => {
                 <p style={{color: '#6E7079'}}><FontAwesomeIcon icon={faCaretRight} style={{color: '#C2C6CE'}}/> View Details</p>
             </div>
 
-            {/* <div className="category-details">
-                {isLoading ? (
-                <p>Loading details...</p>
-                ) : error ? (
-                <p>Error: {error.message || 'Failed to load details'}</p>
-                ) : viewCategoryDetails?.length > 0 ? (
-                    viewCategoryDetails.map((detail) => (
-                        <div key={detail.id}>
-                            <div className="">
-                                <div className='mb-3 doub d-flex justify-content-between'>
-                                  <p>Product Name:</p>
-                                  <small>{detail.product_name}</small>
-                                </div>
-                                <div className='doub d-flex justify-content-between'>
-                                    <p>Product Price:</p>
-                                    <small>₦{Number(detail.price).toLocaleString()}</small>
-                                </div>
-                                <div className='doub d-flex justify-content-between'>
-                                    <p>Product Number:</p>
-                                    <small>{detail.product_number}</small>
-                                </div>
-                            </div>
-                            <div className="">
-                                <div className='mb-3 d-flex justify-content-between'>
-                                    <p>Product Discount:</p>
-                                    <small>₦{Number(detail.discount).toLocaleString()}</small>
-                                </div>
-                                <div className='text-center d-flex justify-content-between'>
-                                    <p>Product Rating:</p>
-                                    <small>{detail.total_rating}</small>
-                                </div>
-                            </div>
-                            <div className="row mt-5">
-                              {detail?.images && detail.images.length > 0 ? (
-                                  detail.images.map((image, index) => (
-                                      <div className="col-sm-12 col-md-12 col-lg-4 text-center" key={index}>
-                                          <img src={image.filename} alt="Thumbnail" className='img-thumbnail' style={{width: '100px'}}/>
-                                      </div>
-                                  ))
-                              ) : (
-                                  <p>No images found</p>
-                              )}
-
-                            </div>
-                            <div className="table-container">
-                              <table className="my-table my-5">
-                                <thead>
-                                  <tr>
-                                    <th>Inches</th>
-                                    <th>Price</th>
-                                    <th>Discount</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {detail?.inches && detail.inches.length > 0 ? (
-                                    detail.inches.map((inch, index) => 
-                                      <tr key={index}>
-                                        <td>{inch.inche}</td>
-                                        <td>₦{Number(inch.price).toLocaleString()}</td>
-                                        <td>₦{Number(inch.discount).toLocaleString()}</td>
-                                      </tr>
-                                    )
-                                  ) : (
-                                    <p className='text-center'>No inches records found</p>
-                                  )}
-                                </tbody>
-                              </table>
-                            </div>
-                            <hr style={{border: '1px solid #FF962E'}} />
-                        </div>
-                    ))
-                ) : (
-                <p className='text-center'>No details available for this category.</p>
-                )}
-            </div> */}
             <div className="category-details">
               {isLoading ? (
                 <p>Loading details...</p>
@@ -866,7 +791,7 @@ const disableAll = async (e) => {
                     </thead>
                     <tbody>
                       {viewCategoryDetails.map((detail) => (
-                        <tr key={detail.id} onClick={() => pDetails(detail.id)}>
+                        <tr key={detail.id} onClick={() => pDetails(detail.id)} style={{cursor: 'pointer'}}>
                           <td>{detail.product_name}</td>
 
                           <td>₦{Number(detail.price).toLocaleString()}</td>
@@ -1095,8 +1020,8 @@ const disableAll = async (e) => {
                       </div>
                       <hr style={{border: '1px solid #FF962E'}}/>
 
-                      <div className="row">
-                        {productDetails.images.map((image) =>
+                      {/* <div className="row">
+                        {productDetails?.images?.map((image) =>
                           <div className="col-sm-4 col-md-12 col-lg-4 d-flex justify-content-center">
                             <div style={{
                                 backgroundImage: `url(${image.filename})`,
@@ -1109,6 +1034,46 @@ const disableAll = async (e) => {
                             </div>
                           </div> 
                         )}
+                      </div> */}
+                      <div id="imageCarousel" className="carousel slide" data-bs-ride="carousel">
+                        <div className="carousel-inner">
+                          {productDetails.images.map((image, index) => (
+                            <div
+                              key={index}
+                              className={`carousel-item ${index === 0 ? "active" : ""}`}
+                            >
+                              <div
+                                style={{
+                                  backgroundImage: `url(${image.filename})`,
+                                  backgroundRepeat: "no-repeat",
+                                  backgroundSize: "contain",
+                                  backgroundPosition: "center",
+                                  width: "100%",
+                                  height: "300px",
+                                  borderRadius: "20px",
+                                }}
+                              ></div>
+                            </div>
+                          ))}
+                        </div>
+                        <button
+                          className="carousel-control-prev custom-control"
+                          type="button"
+                          data-bs-target="#imageCarousel"
+                          data-bs-slide="prev"
+                        >
+                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span className="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                          className="carousel-control-next custom-control"
+                          type="button"
+                          data-bs-target="#imageCarousel"
+                          data-bs-slide="next"
+                        >
+                          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span className="visually-hidden">Next</span>
+                        </button>
                       </div>
                       <hr style={{border: '1px solid #FF962E'}}/>
                       <div className="table-container">

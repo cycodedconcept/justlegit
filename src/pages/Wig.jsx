@@ -54,7 +54,7 @@ const Wig = () => {
             <>
                {Array.isArray(order) && order.length > 0 ? (
                 order.slice(0, 8).map((item, index) => 
-                    <div className="row" key={index} onClick={() => oDetails(item.id)} style={{cursor: 'pointer'}}>
+                    <div className="row p-3 mb-3 mtc" key={index} onClick={() => oDetails(item.id)} style={{cursor: 'pointer', boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px'}}>
                     <div className="col-sm-12 col-md-12 col-lg-8">
                         <label htmlFor=""><b>Delivery Address</b></label>
                         <p>{item.delivery_address}</p>
@@ -63,12 +63,12 @@ const Wig = () => {
                         <p>{item.delivery_landmark}</p>
                     </div>
                     <div className="col-sm-12 col-md-12 col-lg-4">
-                        <label htmlFor=""><b>Date Ordered</b></label>
+                        <label htmlFor=""><b>Date Delivered</b></label>
                         <p>{item.date}</p>
                     </div>
-                    {index !== order.slice(0, 5).length - 1 && (
+                    {/* {index !== order.slice(0, 5).length - 1 && (
                         <hr style={{border: '2px solid #FF962E'}} />
-                    )}
+                    )} */}
                     </div> 
                 )
                 ) : (
@@ -165,13 +165,48 @@ const Wig = () => {
                   </div>
                  </div>
 
-                  {orderDetails?.product?.map((image, index) => 
-                    <div key={index} className="d-flex justify-content-between">
-                      {image.images?.map((img) =>
-                        <img src={img.filename} alt="Thumbnail" className="img-thumbnail w-25 p-3"/> 
-                      )}
+                
+                <div id="productCarousel" className="carousel slide" data-bs-ride="carousel">
+                <div className="carousel-inner">
+                  {orderDetails?.product?.map((image, index) => (
+                    <div
+                      key={index}
+                      className={`carousel-item ${index === 0 ? "active" : ""}`}
+                    >
+                      <div className="d-flex justify-content-center">
+                        {image.images?.map((img, imgIndex) => (
+                          <img
+                            key={imgIndex}
+                            src={img.filename}
+                            alt={`Product ${index + 1} Thumbnail`}
+                            className="img-thumbnail w-25 p-2"
+                          />
+                        ))}
+                      </div>
                     </div>
-                  )}
+                  ))}
+                </div>
+                <button
+                  className="carousel-control-prev custom-control"
+                  type="button"
+                  data-bs-target="#productCarousel"
+                  data-bs-slide="prev"
+                >
+                  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden">Previous</span>
+                </button>
+                <button
+                  className="carousel-control-next custom-control"
+                  type="button"
+                  data-bs-target="#productCarousel"
+                  data-bs-slide="next"
+                >
+                  <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span className="visually-hidden">Next</span>
+                </button>
+                </div>
+
+
 
                   <div className="table-container">
                   <table className="my-table my-5">

@@ -356,7 +356,7 @@ table th {
 }
 
 tbody tr td:last-child {
-    width: 3% !important;
+    /* width: 6% !important; */
 }
 
 .my-table tbody tr:nth-child(even) {
@@ -1124,6 +1124,10 @@ input, textarea, select {
     .tl {
         text-align: left;
     }
+
+    .un img {
+        width: 100%;
+    }
 }
 
 
@@ -1280,15 +1284,32 @@ input, textarea, select {
   }
   /*  */
 
-/* Target only the radio button input */
 .lint {
-    width: 17% !important; /* Adjust width */
-    height: 8% !important; /* Adjust height */
-    accent-color: #af4c4e; /* Color for supported browsers */
+    width: 15% !important; 
+    height: 50% !important;
+    accent-color: #af4c4e;
     cursor: pointer;
 }
 
+.form-check-label {
+    font-size: 15px;
+}
+.custom-control .carousel-control-prev-icon,
+.custom-control .carousel-control-next-icon {
+  background-color: #FF962E !important;
+  border-radius: 50%;
+}
 
+.custom-control:hover .carousel-control-prev-icon,
+.custom-control:hover .carousel-control-next-icon {
+  background-color: #FF962E;
+}
+
+
+.mtc:hover {
+    background: #e0851b;
+    color: #fff;
+}
 
 
 /*  */
