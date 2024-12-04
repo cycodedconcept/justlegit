@@ -93,7 +93,7 @@ const Admin = () => {
         throw new Error(result.message || 'Failed to create user.');
       }
     } catch (err) {
-      Swal.fire({
+      Swal.fire({ 
         icon: 'error',
         title: 'Error',
         text: err.message || 'An error occurred during the submission. Please try again.',
@@ -296,7 +296,7 @@ const Admin = () => {
     <>
     {details ? (
         <>
-            <div className="update-bank text-left mt-5 mt-lg-3">
+            <div className="update-bank text-left mt-3 mt-lg-3">
                 <button className='pro-btn' onClick={switchMode}>Update Bank Details</button>
             </div>
             <form style={{width: '100%'}} onSubmit={handleSubmit}>

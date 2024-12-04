@@ -50,8 +50,8 @@ const Sidebar = ({ onButtonClick, activeContent, onLogout }) => {
     return (
         <>
             <div className="sidebar">
-                <img src={Logo} alt="Logo" className='w-50 mx-2 mt-2'/>
-                <div className="sidebar-menu">
+                <img src={Logo} alt="Logo" className='w-50 mx-2 mt-2 rosa'/>
+                <div className="sidebar-menu mt-4">
                     {showMenu}
                 </div>
                 <button 

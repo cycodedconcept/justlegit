@@ -165,7 +165,7 @@ const Customer = () => {
     <>
     {more ? (
       <>
-        <div className="d-flex justify-content-between mt-5 mb-4 mt-lg-3 mb-lg-4">
+        <div className="d-flex justify-content-between mt-2 mb-4 mt-lg-3 mb-lg-4">
         <div className="sts-btn p-2">
           <button
             onClick={() => { 

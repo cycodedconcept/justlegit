@@ -181,7 +181,7 @@ const Order = () => {
     {productView ? (
       <>
       {showButton ? (
-        <div className="my-5 mt-lg-3">
+        <div className="my-2 mt-lg-3">
           <input type="text" placeholder="Search Order..." className="search-input" value={filterText} onChange={(e) => setFilterText(e.target.value)}/>
           <button className={`or-btn my-3 mx-lg-1 ${activeButton === 'viewOrders' ? 'active-btn' : ''}`} onClick={ivoice}>View Orders</button>
           <button className={`or-btn my-3 mx-lg-1 ${activeButton === 'viewInvoices' ? 'active-btn' : ''}`} onClick={evoice}>View All Invoice</button>

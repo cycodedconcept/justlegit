@@ -110,7 +110,7 @@ const Wig = () => {
                 </div>
                 <div className="modal-body">
                 <div className="row mb-4">
-                  <div className="col-sm-12 col-md-12 col-lg-6" style={{borderRight: '1px solid #FF962E', borderRadius: '20px'}}>
+                  <div className="col-sm-12 col-md-12 col-lg-6" style={{borderRight: '1px solid #FF962E'}}>
                     <div>
                       <div className='d-flex justify-content-between'>
                           <p>Delivery Date:</p>

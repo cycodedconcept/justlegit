@@ -83,11 +83,10 @@ const tableHeaders = ['Product Name', 'Inches', 'Quantity', 'Price', 'Discounted
         allowTaint: true
       });
 
-      // Remove clone
       document.body.removeChild(invoiceClone);
 
       // PDF dimensions
-      const imgWidth = 210; // A4 width in mm
+      const imgWidth = 210;
       const pixelRatio = canvas.width / canvas.height;
       const imgHeight = imgWidth / pixelRatio;
 
@@ -115,7 +114,7 @@ const tableHeaders = ['Product Name', 'Inches', 'Quantity', 'Price', 'Discounted
       });
 
       // Save the PDF
-      pdf.save(`invoice-${numberIn}.pdf`);
+      pdf.save(`invoice-${invoiceData.customer_name}.pdf`);
 
     } catch (error) {
       console.error('Error generating PDF:', error);
@@ -182,7 +181,7 @@ const tableHeaders = ['Product Name', 'Inches', 'Quantity', 'Price', 'Discounted
       url: linkItem
     });
     
-    pdf.save(`invoice-${numberIn}.pdf`);
+    pdf.save(`invoice-${invoiceData.customer_name}.pdf`);
   };
 
   return (

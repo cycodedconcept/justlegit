@@ -129,7 +129,7 @@ const Report = () => {
 
   return (
     <>
-    <form style={{ width: '100%', padding: '0' }} onSubmit={getReport} className="mt-5 mt-lg-3">
+    <form style={{ width: '100%', padding: '0' }} onSubmit={getReport} className="mt-4 mt-lg-3">
       <div className="row">
         <div className="col-sm-12 col-md-12 col-lg-4">
           <div className="form-group mb-4">
